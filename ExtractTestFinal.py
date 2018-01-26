@@ -6,6 +6,7 @@ dict = {}
 regexsmall = r'(<b(.)*>|<i(.)*>|<span(.)*>)((.)*)(</i>|</b>|</span>)'
 regexNor = r'(<h[12345](.)*>|<td(.)*>|<p(.)*>)((.|(?!</i))*)(</h[12345]>|</td>|</p>)'
 
+
 class ExtactTexts():
     def __init__(self):
         with open('index.html', 'r') as inputfile:
@@ -22,25 +23,25 @@ class ExtactTexts():
 
         self.createHTML(FullFilter)
 
-    def properties_creator(self,dictData):
+    def properties_creator(self, dictData):
         outputProperties = open("index.en.properties", "w")
 
         for keys, values in dictData.items():
             outputProperties.write(keys + "=" + values + "\n")
         outputProperties.close()
 
-    def createHTML(self,FileHTML):
+    def createHTML(self, FileHTML):
         outputHTML = open("index.en.html", "w")
         outputHTML.write(FileHTML)
         outputHTML.close()
 
-    def keyCreator(self,valString, group):
+    def keyCreator(self, valString, group):
         genstr = re.sub(r' ', '', valString.title())
-        keypair = group +"_" +genstr[0:7] +"_" +str(random.randint(0, 10000))
+        keypair = group + "_" + genstr[0:7] + "_" + str(random.randint(0, 10000))
         # print(keypair)
         return keypair
 
-    def fileGenerator(self,regular_regex, Filedata, group="Ntag"):
+    def fileGenerator(self, regular_regex, Filedata, group="Ntag"):
         Regexdata = re.findall(regular_regex, Filedata)
         # print(len(Regexdata))
         for i in range(len(Regexdata)):
